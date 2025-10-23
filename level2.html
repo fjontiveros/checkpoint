@@ -377,12 +377,16 @@ nav.bloody::after {
   transform: translateX(-50%);
   width: 400px;
   background: #111;
-  color: #0f0;
+  color: #0f0 !important;
   padding: 20px;
   font-family: monospace;
   border: 2px solid lime;
   z-index: 99999;
   box-shadow: 0 0 15px lime;
+}
+
+#finalChat a{
+  color: #0f0 !important;
 }
 
 #chatBox {
@@ -510,7 +514,7 @@ body.only-chat :not(#finalChat):not(#finalChat *) {
   <div class="main-content">
   <h2>¡Hola Chiquitines!</h2>
   <p>Revive la magia, la alegría y los colores de los años 90 con nuestra querida Xuxa. ¡Vamos a jugar, cantar y soñar juntos!</p>
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKVeaP9gdw1hvlRPPwQi64cicWnFA0B67-C-t8OT-oiu6C34JrmLZCcLKzmbTSBeVf8io&usqp=CAU" alt="Xuxa sonriendo">
+  <img src="https://scontent.faep24-1.fna.fbcdn.net/v/t1.6435-9/123937612_10156977899992255_8420119829382829802_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEFi7EPFYZ7GPw7k1MhW_rIfTJWYFFwBGd9MlZgUXAEZxKdGif20ZdPtPBpMWjlxZtltICwyCxe0xkGA-PfcY_W&_nc_ohc=X8rOtUo9RQcQ7kNvwGNddTK&_nc_oc=Adm0fmJE7uvUQf2N59Z5hb_L4M_CVzjXXjP537pRt-T2evcYvubjM4e9wOVbp3x_UGU&_nc_zt=23&_nc_ht=scontent.faep24-1.fna&_nc_gid=OHR0kNeH3U-hmzKctvOPUA&oh=00_AfdH8WD2lAbeEa5DiCVrV5zl52_2jP6ZmJGaJxBExiT-wA&oe=6921D5A1" alt="Xuxa sonriendo">
   <p><em>"Todo el mundo necesita cariño... y un poco de purpurina."</em></p>
 
   <!-- 🧩 Zona del juego -->
@@ -854,8 +858,11 @@ document.getElementById("chatSend").addEventListener("click", () => {
     else if (chatAttempts < 3) {
       reply.textContent = "📞 No molestes más.";
     } else {
-      reply.textContent = "✅ Ok, ganaste por insistente. Ganaste el juego, seguí este formulario y completalo.";
       // podrías redirigir o mostrar algo más aquí
+	  const link = document.createElement("a");
+	  link.href = "https://docs.google.com/forms/d/e/1FAIpQLSe77SqHn4o6t0SLyPiAbgPCyzboZG-b1cb4s01ae5I2-3W5JA/viewform?usp=header";
+	  link.text = "✅ Ok, ganaste por insistente. Ganaste el juego, seguí este formulario y completalo"
+	  chatBox.appendChild(link);
     }
     chatBox.appendChild(reply);
     chatBox.scrollTop = chatBox.scrollHeight;
