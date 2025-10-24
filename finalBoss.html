@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sitio en construcción</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#1b1b1b" />
+  <style>
+    :root{
+      --bg:#0c0c0c;
+      --ink:#e0dcd2;
+      --accent:#b34a3b;
+      --accent-dim:#6e2a22;
+      --mist:#cfd2cd;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 30% 10%, #1a1a1a 0%, #101010 35%, var(--bg) 70%) fixed,
+                  radial-gradient(800px 400px at 80% 90%, #191919 0%, #0f0f0f 55%, var(--bg) 80%) fixed;
+      color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      overflow:hidden;
+    }
+    .wrap{
+      position:relative;
+      z-index:10;
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding:2rem;
+      text-align:center;
+    }
+    .panel{
+      display:inline-block;
+      padding:2.5rem 2rem;
+      border:1px solid color-mix(in oklab, var(--accent) 50%, #000 50%);
+      background: color-mix(in oklab, #111 85%, var(--accent-dim) 15%);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.6) inset, 0 10px 35px rgba(0,0,0,.6);
+      max-width:780px;
+      backdrop-filter: blur(1.5px) brightness(.95);
+    }
+    h1{
+      margin:0 0 .4rem 0;
+      font-family: Creepster, Inter, system-ui, sans-serif;
+      font-weight:400;
+      letter-spacing:.04em;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--ink);
+      text-shadow: -2px 0 var(--accent-dim), 0 2px #000, 0 0 18px rgba(179,74,59,.3);
+      position:relative;
+      line-height:1;
+    }
+    h1::before, h1::after{
+      content: attr(data-text);
+      position:absolute; inset:0;
+      mix-blend-mode: screen;
+      opacity:.08;
+      filter: contrast(120%);
+    }
+    h1::before{ transform: translate(-2px,0); color:#ff2a2a; animation: glitchX 3.2s steps(2,end) infinite; }
+    h1::after{ transform: translate(2px,0);  color:#2affff; animation: glitchY 2.9s steps(2,end) infinite; }
+    @keyframes glitchX { 0%,6%,100%{clip-path: inset(0 0 0 0)} 3%{clip-path: inset(12% 0 65% 0)} 5%{clip-path: inset(70% 0 5% 0)} }
+    @keyframes glitchY { 0%,6%,100%{clip-path: inset(0 0 0 0)} 3%{clip-path: inset(50% 0 35% 0)} 5%{clip-path: inset(10% 0 80% 0)} }
+    p{
+      margin:.25rem 0 0 0;
+      color: color-mix(in oklab, var(--ink) 75%, #a4a4a4 25%);
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+    }
+    .tag{
+      margin-top:1.25rem;
+      display:inline-block;
+      padding:.4rem .75rem;
+      border:1px dashed color-mix(in oklab, var(--accent) 60%, #000 40%);
+      color: color-mix(in oklab, var(--accent) 80%, var(--ink) 20%);
+      letter-spacing:.12em;
+      font-size:.8rem;
+      text-transform:uppercase;
+      opacity:.9;
+    }
+    .btn{
+      display:inline-block; margin-top:1.1rem; padding:.7rem 1rem;
+      border:1px solid color-mix(in oklab, var(--accent) 55%, #000 45%);
+      background: linear-gradient(#1a1717,#100e0e);
+      color: var(--ink); text-decoration:none; font-weight:600;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.7) inset, 0 6px 18px rgba(0,0,0,.5);
+      transition: transform .08s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(0,0,0,.7) inset, 0 10px 28px rgba(0,0,0,.6); }
+    .fog, .fog::before, .fog::after{
+      position: fixed; inset:-20vmax;
+      pointer-events:none;
+      content:"";
+      background: radial-gradient(60vmax 40vmax at 10% 20%, rgba(207,210,205,.15) 0%, transparent 60%),
+                  radial-gradient(50vmax 35vmax at 90% 70%, rgba(207,210,205,.12) 0%, transparent 65%),
+                  radial-gradient(40vmax 30vmax at 30% 90%, rgba(207,210,205,.14) 0%, transparent 55%);
+      filter: blur(18px) saturate(.9);
+      mix-blend-mode: screen;
+      animation: drift 110s linear infinite;
+    }
+    .fog::before{ animation-duration: 150s; opacity:.95; }
+    .fog::after{  animation-duration: 90s;  opacity:.85; }
+    @keyframes drift { to { transform: translate3d(10vmax, -6vmax, 0) } }
+    .grain{
+      position:fixed; inset:0; pointer-events:none; z-index:5; opacity:.12;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,.02) 2px 4px),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,.03), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(0,0,0,.05), transparent 40%);
+      animation: jitter .9s steps(2,end) infinite;
+      mix-blend-mode: overlay;
+    }
+    @keyframes jitter { 50% { transform: translate3d(.3px,-.4px,0) } }
+    .scanlines{
+      position:fixed; inset:-1px; pointer-events:none; z-index:6; opacity:.08;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.04) 0 1px,
+        rgba(0,0,0,.04) 1px 2px
+      );
+      animation: scrollLines 12s linear infinite;
+      mix-blend-mode: soft-light;
+    }
+    @keyframes scrollLines { to { background-position-y: 100% } }
+    @keyframes pulse { 0%,100%{filter: brightness(1)} 50%{filter: brightness(.95)} }
+    .panel{ animation: pulse 6s ease-in-out infinite; }
+    .foot{
+      margin-top:1.2rem; opacity:.75; font-size:.9rem;
+      color: color-mix(in oklab, var(--ink) 65%, #8a8a8a 35%);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .fog, .fog::before, .fog::after, .grain, .scanlines, h1::before, h1::after, .panel{ animation: none !important }
+    }
+    @media (max-width: 460px){
+      .panel{ padding:1.7rem 1.2rem }
+      .tag{ font-size:.72rem }
+    }
+  </style>
+</head>
+<body>
+  <div class="fog" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <main class="wrap">
+    <section class="panel" role="status" aria-live="polite">
+      <h1 data-text="Sitio en construcción">Sitio en construcción</h1>
+      <p>Algo se está gestando entre la niebla…</p>
+      <p>Votame y volvé pronto.</p>
+      <div class="tag">ESTADO: <strong>Fuera de servicio</strong></div>
+      <div class="foot">Último avistamiento: <span id="ts"></span></div>
+    </section>
+  </main>
+  <script>
+    const el = document.getElementById('ts');
+    try{
+      const now = new Date();
+      const fmt = new Intl.DateTimeFormat('es-AR', { dateStyle:'full', timeStyle:'short' });
+      el.textContent = fmt.format(now);
+    }catch{ el.textContent = new Date().toLocaleString('es-AR'); }
+  </script>
+</body>
+</html>
