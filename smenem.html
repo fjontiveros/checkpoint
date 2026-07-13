@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Juego de MS-DOS Web</title>
+    
+    <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css">
+    <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #contenedor-dos {
+            width: 800px;
+            height: 600px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenedor-dos"></div>
+
+<script>
+        window.addEventListener("load", async () => {
+            if (typeof Dos === "undefined") {
+                console.error("No se pudo cargar el motor JS-DOS.");
+                return;
+            }
+
+            try {
+                // Ahora el emulador solo recibe la URL y las banderas de automatización.
+                // Toda la magia del autoexec la lee directo desde el zip.
+                const ci = await Dos(document.getElementById("contenedor-dos"), {
+                    url: "smenem.zip",
+                    autoStart: true,
+                    kiosk: true
+                });
+                
+                console.log("¡VM de DOS iniciada automáticamente con éxito!");
+
+            } catch (error) {
+                console.error("Error crítico en la VM de DOS:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>
