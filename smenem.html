@@ -3,32 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Juego de MS-DOS Web</title>
+    <title>CheckpointVG: Presentando Super Menem Bros</title>
     
     <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css">
     <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
     
     <style>
+        /* --- Reset y Estilos Globales --- */
+        @font-face {
+            font-family: 'Airone'; /* El nombre que le daremos para usarla en CSS */
+            src: url('fonts/RadwaveFont_Demo.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             margin: 0;
-            background-color: #000;
+            padding: 0;
+            background-color: #0b1122; 
+            color: #E7E0C4; 
+            font-family: 'Radwave', sans-serif; 
+            display: flex;
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+
+        /* --- Encabezado --- */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .logo-cp-container img {
+            width: 120px; 
+            height: auto;
+        }
+
+        .presentando-txt {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Área Central de Presentación --- */
+        .seccion-central {
+            flex-grow: 1; 
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            position: relative; 
+            overflow: hidden; 
         }
-        #contenedor-dos {
+
+        /* Las franjas retro usando tu imagen */
+        .rainbow-stripes {
+            position: absolute;
+            width: 50%;
+            height: 200px; 
+            top: 50%;
+            transform: translateY(-50%);
+            
+            background-image: url('images/lines.png'); 
+            
+            background-position: center; 
+            background-repeat: no-repeat; 
+            clip-path: polygon(100px 0, 100% 0, calc(100% - 100px) 100%, 0 100%);
+        }
+
+        /* Contenedor del emulador con el marco */
+        .marco-dos-presentacion {
             width: 800px;
             height: 600px;
-            max-width: 100%;
+            max-width: 90vw; 
+            max-height: calc(90vw * (600 / 800));
+            
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+            overflow: hidden;
+            position: relative; 
+            background-color: black;
+        }
+
+        #contenedor-dos {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Superposición de Texto Estático de MS-DOS --- */
+        .dos-text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; 
+            z-index: 10;
+        }
+
+        .dos-crt-dots {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+            background-size: 3px 3px;
+            opacity: 0.3;
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Logos (izquierda) */
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+        }
+
+        .logo-footer img {
+            width: 40px; 
+            height: auto;
+        }
+
+        .footer-left h2 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        /* Iconos de Redes Sociales (derecha) */
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-icon img {
+            width: 24px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icon img:hover {
+            opacity: 1;
+        }
+
+        /* --- Adaptabilidad (Responsive) --- */
+        @media (max-width: 1700px) {
+            .rainbow-stripes {
+                width: 75% !important;
+            }
+        @media (max-width: 1100px) {
+            .rainbow-stripes {
+                width: 100% !important;
+            }
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div id="contenedor-dos"></div>
+    <header>
+        <div class="logo-cp-container">
+            <img src="images/LOGO flat.png" alt="Logo Checkpoint Central">
+        </div>
+        <span class="presentando-txt">PRESENTANDO:</span>
+    </header>
 
-<script>
+    <main class="seccion-central">
+        <div class="rainbow-stripes"></div>
+
+        <div class="marco-dos-presentacion">
+            <div id="contenedor-dos"></div>
+            <div class="dos-text-overlay">
+                <div class="dos-crt-dots"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <a href="https://cafecito.app/checkpointvg" target="_blank" class="social-icon"><img src="images/cafecito.png" alt="Cafecito"></a>
+            <a href="https://ko-fi.com/checkpointvg" target="_blank" class="social-icon"><img src="images/kofi.png" alt="Kofi"></a>
+            <div class="logo-footer">
+            </div>
+            <h2>CHECKPOINTVG</h2>
+        </div>
+
+        <div class="footer-right">
+            <a href="https://www.twitch.tv/checkpointvg" target="_blank" class="social-icon"><img src="images/twitch.png" alt="Twitch"></a>
+            <a href="https://www.youtube.com/checkpointvg" target="_blank" class="social-icon"><img src="images/youtube.png" alt="YouTube"></a>
+            <a href="https://www.instagram.com/podcheckpoint/?hl=es-la" target="_blank" class="social-icon"><img src="images/instagram.png" alt="Instagram"></a>
+            <a href="https://discord.com/channels/445775995841150986/445775995841150989" target="_blank" class="social-icon"><img src="images/discord.png" alt="Discord"></a>
+        </div>
+    </footer>
+
+    <script>
         window.addEventListener("load", async () => {
             if (typeof Dos === "undefined") {
                 console.error("No se pudo cargar el motor JS-DOS.");
@@ -36,8 +228,6 @@
             }
 
             try {
-                // Ahora el emulador solo recibe la URL y las banderas de automatización.
-                // Toda la magia del autoexec la lee directo desde el zip.
                 const ci = await Dos(document.getElementById("contenedor-dos"), {
                     url: "smenem.zip",
                     autoStart: true,
