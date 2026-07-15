@@ -27,14 +27,23 @@
             flex-direction: column; 
             min-height: 100vh;
         }
-
-        /* --- Encabezado --- */
+/* --- Nuevo Contenedor Principal --- */
+        .contenido-principal {
+            flex-grow: 1;           /* Absorbe el espacio vertical sobrante */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centra verticalmente el bloque entero (Header + Emulador) */
+            align-items: center;     /* Centra horizontalmente */
+            gap: 15px;              /* ¡CONTROL CLAVE! Ajusta este valor para acercar/alejar el header del emulador */
+            width: 100%;
+        }
+/* --- Encabezado --- */
         header {
             display: flex;
             flex-direction: column;
             align-items: center; 
-            margin-top: 40px;
             width: 100%;
+            z-index: 5;             /* Asegura que quede por encima de las franjas de fondo */
         }
 
         .logo-cp-container img {
@@ -53,18 +62,19 @@
 
         /* --- Área Central de Presentación --- */
         .seccion-central {
-            flex-grow: 1; 
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative; 
             overflow: hidden; 
+            width: 100%;
+            padding: 20px 0;        /* Espacio para que no se corte la sombra del emulador */
         }
 
         /* Las franjas retro usando tu imagen */
         .rainbow-stripes {
             position: absolute;
-            width: 50%;
+            width: 100%;
             height: 200px; 
             top: 50%;
             transform: translateY(-50%);
@@ -146,6 +156,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin: 0;
+            font-weight: bold;
         }
 
         /* Iconos de Redes Sociales (derecha) */
@@ -167,6 +178,7 @@
         }
 
         /* --- Adaptabilidad (Responsive) --- */
+        /*
         @media (max-width: 1700px) {
             .rainbow-stripes {
                 width: 75% !important;
@@ -181,34 +193,36 @@
                 padding: 20px;
             }
         }
+        */
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-cp-container">
-            <img src="images/LOGO flat.png" alt="Logo Checkpoint Central">
-        </div>
-        <span class="presentando-txt">PRESENTANDO:</span>
-    </header>
-
-    <main class="seccion-central">
-        <div class="rainbow-stripes"></div>
-
-        <div class="marco-dos-presentacion">
-            <div id="contenedor-dos"></div>
-            <div class="dos-text-overlay">
-                <div class="dos-crt-dots"></div>
+    <div class="contenido-principal">
+        <header>
+            <div class="logo-cp-container">
+                <img src="images/LOGO flat.png" alt="Logo Checkpoint Central">
             </div>
-        </div>
-    </main>
+            <span class="presentando-txt">PRESENTANDO:</span>
+        </header>
+
+        <main class="seccion-central">
+            <div class="rainbow-stripes"></div>
+
+            <div class="marco-dos-presentacion">
+                <div id="contenedor-dos"></div>
+                <div class="dos-text-overlay">
+                    <div class="dos-crt-dots"></div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <footer>
         <div class="footer-left">
             <a href="https://cafecito.app/checkpointvg" target="_blank" class="social-icon"><img src="images/cafecito.png" alt="Cafecito"></a>
             <a href="https://ko-fi.com/checkpointvg" target="_blank" class="social-icon"><img src="images/kofi.png" alt="Kofi"></a>
-            <div class="logo-footer">
-            </div>
+            <div class="logo-footer"></div>
             <h2>CHECKPOINTVG</h2>
         </div>
 
@@ -219,6 +233,7 @@
             <a href="https://discord.com/channels/445775995841150986/445775995841150989" target="_blank" class="social-icon"><img src="images/discord.png" alt="Discord"></a>
         </div>
     </footer>
+
 
     <script>
         window.addEventListener("load", async () => {
